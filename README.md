@@ -3,8 +3,7 @@
 ![Twitter: 29](https://img.shields.io/badge/dynamic/json?color=%23479be9&label=Twitter&query=%24.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtwitter%26queryKey%3DMatsurimywaifu)
 ![Bilibili: 2149](https://img.shields.io/badge/dynamic/json?color=%23ed91ab&label=Bilibili&query=%24.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dbilibili%26queryKey%3D10509882)
 ![少数派: 63](https://img.shields.io/badge/dynamic/json?color=da282a&label=%E5%B0%91%E6%95%B0%E6%B4%BE&query=%24.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dsspai%26queryKey%3Ddx7gz8d2) 
-- 🍻 Senior at 🇨🇳 [NUFE](http://www.nufe.edu.cn/), _BSc in Financial Mathematics_
-- 🖋 Writer at [sspai](https://sspai.com/u/dx7gz8d2)
+- 🖋 Writer at [Sspai](https://sspai.com/u/dx7gz8d2)
 - ✍️ Newsletter[《一人杂志》](https://matsuri.zhubai.love/)
 - 🏃 自学前端中
 
