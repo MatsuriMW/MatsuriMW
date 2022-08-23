@@ -1,11 +1,11 @@
-# 马自立 [![wakatime](https://camo.githubusercontent.com/cb26bca0b30cf4df6726d14371ffef5f6495a8e6d6234241cf3e34b85e03c2b2/68747470733a2f2f77616b6174696d652e636f6d2f62616467652f757365722f39323133646339362d646630642d346536362d623062622d3530663965303465393838632e737667)](https://wakatime.com/@MatsuriMW)
+# 马自立 [![wakatime](https://wakatime.com/badge/user/f0d53949-671f-460b-9f58-999063af3d72.svg)](https://wakatime.com/@f0d53949-671f-460b-9f58-999063af3d72)2e636f6d2f62616467652f757365722f39323133646339362d646630642d346536362d623062622d3530663965303465393838632e737667)](https://wakatime.com/@MatsuriMW)
 
 我是一个热衷于探索前端开发新事物的初级萌新，2022年开始自学前端，坐标无锡
 
-我的偶像是 [Anthony Fu](https://github.com/antfu) 先生，并向往成为自由独立开发者。
+我的偶像是[antfu (Anthony Fu)](https://github.com/antfu)先生，并向往成为自由独立开发者。
 
 
-正在学习以下技能：
+他正在学习以下技能：
 
 **Web Developer**
 
