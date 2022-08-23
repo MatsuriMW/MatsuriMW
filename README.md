@@ -2,10 +2,10 @@
 
 我是一个热衷于探索前端开发新事物的初级萌新，2022年开始自学前端，坐标无锡
 
-我的偶像是[antfu (Anthony Fu)](https://github.com/antfu)先生，并向往成为自由独立开发者。
+我的偶像是 [Anthony Fu](https://github.com/antfu) 先生，并向往成为自由独立开发者。
 
 
-他正在学习以下技能：
+正在学习以下技能：
 
 **Web Developer**
 
