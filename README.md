@@ -26,6 +26,3 @@
 
 **Newsletter**
 [一人杂志](https://matsuri.zhubai.love/)
-
-**Podcast**
-(同名播客，准备中）
