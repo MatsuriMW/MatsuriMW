@@ -1,6 +1,6 @@
 # 马自立 [![wakatime](https://wakatime.com/badge/user/f0d53949-671f-460b-9f58-999063af3d72.svg)](https://wakatime.com/@f0d53949-671f-460b-9f58-999063af3d72)
 
-我是一个热衷于探索前端开发事物的初心者，2022年开始自学 CS，坐标无锡，偶像是 [antfu (Anthony Fu)](https://github.com/antfu) 先生。
+我是一个热衷于探索前端开发事物的初心者，2022年开始自学 CS，偶像是 [antfu (Anthony Fu)](https://github.com/antfu) 先生。
 
 **Web Developer**
 
