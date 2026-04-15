@@ -1,0 +1,483 @@
+{
+  "name": "小红书内容和评论情感分析",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "小红书舆情分析",
+        "formDescription": "输入一个关键词，抓取小红书笔记内容与评论，并分别做情感分析。",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "keyword",
+              "placeholder": "例如：insta360 Go",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d6d3cddf-4cf5-4aee-a3f3-82792de1ff56",
+      "name": "关键词触发",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        432
+      ],
+      "webhookId": "ee6afdb0-00e5-4c95-9046-f7f57e55d7ae"
+    },
+    {
+      "parameters": {
+        "connectionType": "http",
+        "operation": "executeTool",
+        "toolName": "search_feeds",
+        "toolParameters": "={\"keyword\": \"{{ $('关键词触发').item.json.keyword }}\"}"
+      },
+      "id": "2ef1901a-6f2f-4b32-99ef-5aaa7ebf99db",
+      "name": "MCP Client",
+      "type": "n8n-nodes-mcp.mcpClient",
+      "typeVersion": 1,
+      "position": [
+        256,
+        432
+      ],
+      "credentials": {
+        "mcpClientHttpApi": {
+          "id": "2xALdm17IAsoIQ5k",
+          "name": "MCP Client (STDIO) account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const sourceItems = $input.all();\n\nconst candidates = [];\nconst seen = new Set();\n\nfor (const item of sourceItems) {\n  let feeds = [];\n  try {\n    const content = item.json?.result?.content;\n    if (Array.isArray(content)) {\n      for (const c of content) {\n        if (c.type === 'text' && c.text) {\n          const parsed = JSON.parse(c.text);\n          if (Array.isArray(parsed.feeds)) feeds = parsed.feeds;\n        }\n      }\n    }\n  } catch (e) {}\n\n  for (const feed of feeds) {\n    if (feed.modelType !== 'note') continue;\n    const id = feed.id;\n    const token = feed.xsecToken || '';\n    const title = feed.noteCard?.displayTitle || '';\n    if (!id) continue;\n    const key = `${id}__${token}`;\n    if (seen.has(key)) continue;\n    seen.add(key);\n    const noteUrl = token\n      ? `https://www.xiaohongshu.com/explore/${id}?xsec_token=${token}`\n      : `https://www.xiaohongshu.com/explore/${id}`;\n    candidates.push({\n      keyword: $('关键词触发').first().json.keyword,\n      id, token, title, noteUrl\n    });\n  }\n}\n\nif (!candidates.length) {\n  return [{ json: { keyword: $('关键词触发').first().json.keyword, parseWarning: '未识别出笔记' } }];\n}\n\nreturn candidates.slice(0, 20).map(item => ({ json: item }));"
+      },
+      "id": "afe1e9f0-9c17-434d-85e5-71bbd93f92c1",
+      "name": "Code拆解feeds",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        512,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "connectionType": "http",
+        "operation": "executeTool",
+        "toolName": "get_feed_detail",
+        "toolParameters": "={\"feed_id\": \"{{ $json.id }}\", \"xsec_token\": \"{{ $json.token }}\", \"load_all_comments\": true}"
+      },
+      "id": "d73f1838-9210-4503-8bdd-89025097a0d5",
+      "name": "MCP Client1",
+      "type": "n8n-nodes-mcp.mcpClient",
+      "typeVersion": 1,
+      "position": [
+        768,
+        432
+      ],
+      "credentials": {
+        "mcpClientHttpApi": {
+          "id": "2xALdm17IAsoIQ5k",
+          "name": "MCP Client (STDIO) account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const detailItems = $input.all();\n\nconst merged = detailItems.map((item, index) => {\n  // MCP Client wraps the response in result.content[].text (a JSON string)\n  let d = {};\n  try {\n    const content = item.json?.result?.content;\n    if (Array.isArray(content)) {\n      for (const c of content) {\n        if (c.type === 'text' && c.text) {\n          const parsed = JSON.parse(c.text);\n          d = parsed.data || parsed || {};\n          break;\n        }\n      }\n    } else if (item.json?.data) {\n      d = item.json.data;\n    }\n  } catch(e) {}\n\n  const note = d.note || {};\n  const commentList = d.comments?.list || [];\n\n  const description = note.desc || note.title || '';\n\n  const comments = [];\n  for (const c of commentList) {\n    if (c.content) comments.push(c.content);\n    for (const sub of (c.subComments || [])) {\n      if (sub.content) comments.push(sub.content);\n    }\n  }\n\n  return {\n    keyword: $('关键词触发').first().json.keyword,\n    index: index + 1,\n    title: note.title || '',\n    description,\n    comments,\n  };\n});\n\nreturn [{\n  json: {\n    keyword: $('关键词触发').first().json.keyword,\n    noteCount: merged.length,\n    details: merged,\n  }\n}];"
+      },
+      "id": "697c6def-4753-4216-a956-32f41c30900b",
+      "name": "code解析detail页",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1024,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "assign-keyword",
+              "name": "keyword",
+              "type": "string",
+              "value": "={{ $json.keyword }}"
+            },
+            {
+              "id": "assign-noteCount",
+              "name": "noteCount",
+              "type": "number",
+              "value": "={{ $json.noteCount }}"
+            },
+            {
+              "id": "assign-description",
+              "name": "description",
+              "type": "string",
+              "value": "={{ $json.details.map(function(item, i) { return '【笔记' + (i + 1) + '】' + (item.description || '无描述'); }).join('\\n\\n') }}"
+            },
+            {
+              "id": "assign-comments",
+              "name": "comments",
+              "type": "string",
+              "value": "={{ $json.details.map(function(item, i) { return '【笔记' + (i + 1) + '评论】\\n' + ((item.comments || []).join('\\n') || '无评论'); }).join('\\n\\n') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7a2e3483-4a08-4411-980e-0227c299235c",
+      "name": "填装备注字段内容",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1280,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一个资深的舆情分析专家，根据以下内容做舆情分析，分析内容来源仅限于数据源输入。\n\n主题词是：{{ $json.keyword }}\n用户评价内容是：{{ $json.description }}\n\n要求：博主发布内容情感分析使用 description 来源分析。\n严格按照以下结构输出：\n1. summary：一句话总结整体情感比例\n2. positive_keywords：正向态度关键词数组，每项格式为【关键词 次数/证据】\n3. negative_keywords：负向态度关键词数组，每项格式为【关键词 次数/证据】",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "id": "62acfd77-ddf8-47bf-9994-90412c06bd13",
+      "name": "description",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1536,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"summary\": \"博主描述内容：正向45%，负向35%，中性20%\",\n  \"positive_keywords\": [\"隐蔽便携 1次\", \"画质清晰 2次\"],\n  \"negative_keywords\": [\"价格贵 2次\", \"配件少 1次\"]\n}"
+      },
+      "id": "50ffcc66-c70c-4aa5-bb64-a57f4a6a3907",
+      "name": "Structured Output Parser1",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1744,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一个资深的舆情分析专家，根据以下内容做舆情分析，分析内容来源仅限于数据源输入。\n\n主题词是：{{ $json.keyword }}\n用户评论内容是：{{ $json.comments }}\n\n要求：只基于评论内容做情感分析。\n严格按照以下结构输出：\n1. summary：一句话总结整体情感比例\n2. positive_keywords：正向态度关键词数组，每项格式为【关键词 次数/证据】\n3. negative_keywords：负向态度关键词数组，每项格式为【关键词 次数/证据】",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "id": "fec3fa0d-0868-4ad6-b69d-5ebb6d081230",
+      "name": "comments",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1536,
+        544
+      ]
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"summary\": \"用户评论内容：正向35%，负向45%，中性20%\",\n  \"positive_keywords\": [\"小巧便携 8次\", \"视角多样 5次\"],\n  \"negative_keywords\": [\"发热严重 12次\", \"续航差 9次\"]\n}"
+      },
+      "id": "367d5438-29ee-4257-9362-9aaa34a7a988",
+      "name": "Structured Output Parser2",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1744,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        1504,
+        384
+      ],
+      "id": "df969ee3-0881-48d5-b15d-193d8015182a",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "Js5KqZ5jwM5sydKB",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        1504,
+        768
+      ],
+      "id": "afab5f2e-fae8-4e7c-ba10-e3c4816bbd62",
+      "name": "DeepSeek Chat Model1",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "Js5KqZ5jwM5sydKB",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "append"
+      },
+      "id": "b1c2d3e4-0001-0001-0001-000000000001",
+      "name": "合并分析结果",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1824,
+        376
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const items = $input.all();\n\nfunction extract(item) {\n  const j = item.json;\n  if (j && j.summary) return j;\n  if (j && j.output && j.output.summary) return j.output;\n  if (j && j.output && typeof j.output === 'string') {\n    try { return JSON.parse(j.output); } catch(e) {}\n  }\n  return {};\n}\n\n// 从 summary 解析百分比，格式如 \"正向45%，负向35%，中性20%\"\nfunction parsePct(summary) {\n  const r = { pos: 0, neg: 0, neu: 0 };\n  const pm = summary.match(/正向\\s*(\\d+)%/);\n  const nm = summary.match(/负向\\s*(\\d+)%/);\n  const zm = summary.match(/中性\\s*(\\d+)%/);\n  if (pm) r.pos = parseInt(pm[1]);\n  if (nm) r.neg = parseInt(nm[1]);\n  if (zm) r.neu = parseInt(zm[1]);\n  // 若解析不到，均分\n  if (r.pos + r.neg + r.neu === 0) { r.pos = 33; r.neg = 33; r.neu = 34; }\n  return r;\n}\n\n// 从关键词字符串解析词和次数，格式如 \"隐蔽便携 2次\" 或 \"【价格贵 3次/嫌贵】\"\nfunction parseKw(str) {\n  str = str.replace(/[【】]/g, '').trim();\n  const m = str.match(/^(.+?)\\s+(\\d+)次/);\n  if (m) return { kw: m[1].trim(), n: parseInt(m[2]) };\n  return { kw: str, n: 1 };\n}\n\n// ASCII 进度条（20格）\nfunction bar(pct) {\n  const filled = Math.min(20, Math.round(pct / 100 * 20));\n  return '`' + '█'.repeat(filled) + '░'.repeat(20 - filled) + '`';\n}\n\n// 生成关键词排行 Markdown 表格行\nfunction kwRows(arr) {\n  if (!arr || arr.length === 0) return '| - | 暂无数据 | - | - |';\n  const parsed = arr.map(parseKw).sort((a, b) => b.n - a.n);\n  const total = parsed.reduce((s, k) => s + k.n, 0);\n  return parsed.map((k, i) => {\n    const pct = total > 0 ? Math.round(k.n / total * 100) : 0;\n    return '| ' + (i + 1) + ' | ' + k.kw + ' | ' + k.n + '次 | ' + bar(pct) + ' ' + pct + '% |';\n  }).join('\\n');\n}\n\nconst desc = extract(items[0] || {});\nconst cmnt = extract(items[1] || {});\nconst keyword = $('填装备注字段内容').first().json.keyword || '';\nconst now = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });\nconst dateStr = new Date().toISOString().slice(0, 10);\n\nconst dp = parsePct(desc.summary || '');\nconst cp = parsePct(cmnt.summary || '');\n\nconst descPosTotal = (desc.positive_keywords || []).map(parseKw).reduce((s, k) => s + k.n, 0);\nconst descNegTotal = (desc.negative_keywords || []).map(parseKw).reduce((s, k) => s + k.n, 0);\nconst cmntPosTotal = (cmnt.positive_keywords || []).map(parseKw).reduce((s, k) => s + k.n, 0);\nconst cmntNegTotal = (cmnt.negative_keywords || []).map(parseKw).reduce((s, k) => s + k.n, 0);\n\nconst lines = [\n  '# 小红书舆情分析报告',\n  '',\n  '| 关键词 | 分析时间 | 笔记数 |',\n  '|--------|---------|--------|',\n  '| **' + keyword + '** | ' + now + ' | 最多20条 |',\n  '',\n  '---',\n  '',\n  '## 一、情感比例总览',\n  '',\n  '### 博主发文情感',\n  '',\n  '> ' + (desc.summary || '暂无'),\n  '',\n  '| 情感 | 占比 | 可视化（20格） |',\n  '|------|------|----------------|',\n  '| 😊 正向 | ' + dp.pos + '% | ' + bar(dp.pos) + ' |',\n  '| 😞 负向 | ' + dp.neg + '% | ' + bar(dp.neg) + ' |',\n  '| 😐 中性 | ' + dp.neu + '% | ' + bar(dp.neu) + ' |',\n  '',\n  '### 用户评论情感',\n  '',\n  '> ' + (cmnt.summary || '暂无'),\n  '',\n  '| 情感 | 占比 | 可视化（20格） |',\n  '|------|------|----------------|',\n  '| 😊 正向 | ' + cp.pos + '% | ' + bar(cp.pos) + ' |',\n  '| 😞 负向 | ' + cp.neg + '% | ' + bar(cp.neg) + ' |',\n  '| 😐 中性 | ' + cp.neu + '% | ' + bar(cp.neu) + ' |',\n  '',\n  '---',\n  '',\n  '## 二、关键词频次排行',\n  '',\n  '### 博主发文 — 正向关键词（共' + descPosTotal + '次）',\n  '',\n  '| 排名 | 关键词 | 频次 | 占比 |',\n  '|------|--------|------|------|',\n  kwRows(desc.positive_keywords),\n  '',\n  '### 博主发文 — 负向关键词（共' + descNegTotal + '次）',\n  '',\n  '| 排名 | 关键词 | 频次 | 占比 |',\n  '|------|--------|------|------|',\n  kwRows(desc.negative_keywords),\n  '',\n  '### 用户评论 — 正向关键词（共' + cmntPosTotal + '次）',\n  '',\n  '| 排名 | 关键词 | 频次 | 占比 |',\n  '|------|--------|------|------|',\n  kwRows(cmnt.positive_keywords),\n  '',\n  '### 用户评论 — 负向关键词（共' + cmntNegTotal + '次）',\n  '',\n  '| 排名 | 关键词 | 频次 | 占比 |',\n  '|------|--------|------|------|',\n  kwRows(cmnt.negative_keywords),\n  '',\n  '---',\n  '',\n  '## 三、汇总数据',\n  '',\n  '| 维度 | 正向次数 | 负向次数 | 正负比 |',\n  '|------|---------|---------|--------|',\n  '| 博主发文 | ' + descPosTotal + '次 | ' + descNegTotal + '次 | ' + (descNegTotal > 0 ? (descPosTotal / descNegTotal).toFixed(2) : '∞') + ' |',\n  '| 用户评论 | ' + cmntPosTotal + '次 | ' + cmntNegTotal + '次 | ' + (cmntNegTotal > 0 ? (cmntPosTotal / cmntNegTotal).toFixed(2) : '∞') + ' |',\n];\n\nconst markdown = lines.join('\\n');\nconst filename = keyword + '_舆情分析_' + dateStr + '.md';\n\nreturn [{ json: { keyword, markdown, filename } }];"
+      },
+      "id": "b1c2d3e4-0002-0002-0002-000000000002",
+      "name": "格式化Markdown报告",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2048,
+        376
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "markdown",
+        "binaryPropertyName": "data",
+        "options": {
+          "fileName": "={{ $json.filename }}",
+          "mimeType": "text/markdown"
+        }
+      },
+      "id": "b1c2d3e4-0003-0003-0003-000000000003",
+      "name": "转换为文件",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        2272,
+        376
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "=/Users/chenchen/Downloads/{{ $json.filename }}",
+        "dataPropertyName": "data"
+      },
+      "id": "b1c2d3e4-0004-0004-0004-000000000004",
+      "name": "保存到Downloads",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        2496,
+        376
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "关键词触发": {
+      "main": [
+        [
+          {
+            "node": "MCP Client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "main": [
+        [
+          {
+            "node": "Code拆解feeds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code拆解feeds": {
+      "main": [
+        [
+          {
+            "node": "MCP Client1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client1": {
+      "main": [
+        [
+          {
+            "node": "code解析detail页",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "code解析detail页": {
+      "main": [
+        [
+          {
+            "node": "填装备注字段内容",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "填装备注字段内容": {
+      "main": [
+        [
+          {
+            "node": "description",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "comments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "description",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "description",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "comments",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser2": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "comments",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "description": {
+      "main": [
+        [
+          {
+            "node": "合并分析结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "comments": {
+      "main": [
+        [
+          {
+            "node": "合并分析结果",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "合并分析结果": {
+      "main": [
+        [
+          {
+            "node": "格式化Markdown报告",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "格式化Markdown报告": {
+      "main": [
+        [
+          {
+            "node": "转换为文件",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "转换为文件": {
+      "main": [
+        [
+          {
+            "node": "保存到Downloads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0529b50f-5221-4d8c-9a7f-e808e5829e9e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "16ab8306639b9c250fbb4774bcf6ec8109035b22e83c42fa8fa95d2e734c0baf"
+  },
+  "id": "pge4tvAJweENpLYM",
+  "tags": []
+}
