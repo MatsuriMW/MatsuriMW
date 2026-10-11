@@ -6,7 +6,7 @@
 
 | 项目 | 它做什么 | 现在的状态 |
 |---|---|---|
-| 🌀 [螺旋日程](https://github.com/MatsuriMW/Obsidian-Plugins/tree/main/nautilus-spiral) | Obsidian 插件。把今天日记里的事件和待办画成一条螺旋，待办从「现在」往后填进空档，容量条告诉你今天排不排得下；螺旋内圈画出 AI Agent 在干活的时段 | 每天在用，从仓库手动装；日历、专注、通知这几项只在 macOS 上有 |
+| 🌀 [螺旋日程](https://github.com/MatsuriMW/nautilus-spiral) | Obsidian 插件。把今天日记里的事件和待办画成一条螺旋，待办从「现在」往后填进空档，容量条告诉你今天排不排得下；Claude、Codex、WorkBuddy 的会话可以自动记回日记，变成 DOING / SUSPENDED 的任务行和实际时段 | Release 1.0.0，仅桌面端，macOS 上功能最全 |
 | 💬 [Telegram Companion](https://github.com/MatsuriMW/telegram-companion) | Obsidian 插件。手机上随手发一句进当天日记；想聊的时候，它先读你近一周的日记再开口。模型自己选，接本机 Ollama 的话日记不出电脑 | Release 1.0.2，GPL-3.0，基于 Telegram Inbox |
 | 🔗 [Roam Backlinks](https://github.com/MatsuriMW/roam-backlinks) | Obsidian 插件。像 Logseq、Roam Research 那样在反链里逐块原地编辑，带可展开的面包屑和带反链的 PDF 导出 | Release 1.0.1 |
 | 🎭 [AI 人物设计 Skill](https://github.com/MatsuriMW/ai-character-design-skill) | 把「轻佻的男性」这种模糊感觉，拆成生图、生视频模型能直接执行的锁定段。附 122 张人物原型卡、服化道和连戏表 | v0.1.3，适用于 Claude Code / Codex / claude.ai |
@@ -16,7 +16,7 @@
 
 ## 正在做的
 
-- **螺旋日程**：自动把 Agent 会话按 TODO / DOING / DONE 记进当天日记，用时按会话真正在动的时段算。
+- **螺旋日程**：上架 Obsidian 社区插件市场。
 - **Telegram Companion**：上架 Obsidian 社区插件市场，等原作者同意。
 - **按感觉找图**：用 SigLIP2 给约 8,400 张设计素材建语义索引，一句话或一张参考图找图。
 
