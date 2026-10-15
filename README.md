@@ -19,9 +19,9 @@
   <a href="https://github.com/MatsuriMW/token-receipt"><img src="assets/token-receipt-scenes.jpg" width="840" alt="同一张 Token 小票摆在木桌、软木板、手账本和账单夹板上"></a>
 </p>
 
-<p align="center">🌀 <a href="https://github.com/MatsuriMW/nautilus-spiral">螺旋日程</a> · 34 秒介绍片（有声音）：片子里的面板是插件自己的代码按一篇虚构日记画出来的</p>
+<p align="center">🌀 <a href="https://github.com/MatsuriMW/nautilus-spiral">螺旋日程</a> · 50 秒介绍片（有声音）：片子里的面板是插件自己的代码按一篇虚构日记画出来的</p>
 
-https://github.com/user-attachments/assets/43952d18-314f-4f76-aa15-b21736ab2760
+https://github.com/user-attachments/assets/1e0967bc-d498-456a-9d82-46750d761c08
 
 ## 这些项目拼在一起
 
