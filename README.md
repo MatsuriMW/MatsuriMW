@@ -15,10 +15,6 @@
   </tr>
 </table>
 
-<p align="center">
-  <a href="https://github.com/MatsuriMW/token-receipt"><img src="assets/token-receipt-scenes.jpg" width="840" alt="同一张 Token 小票摆在木桌、软木板、手账本和账单夹板上"></a>
-</p>
-
 <p align="center">🌀 <a href="https://github.com/MatsuriMW/nautilus-spiral">螺旋日程</a> · 50 秒介绍片（有声音）：片子里的面板是插件自己的代码按一篇虚构日记画出来的</p>
 
 https://github.com/user-attachments/assets/1e0967bc-d498-456a-9d82-46750d761c08
@@ -37,9 +33,9 @@ https://github.com/user-attachments/assets/1e0967bc-d498-456a-9d82-46750d761c08
 
 | 项目 | 它做什么 | 现在的状态 |
 |---|---|---|
-| 🌀 [螺旋日程](https://github.com/MatsuriMW/nautilus-spiral) | Obsidian 插件。把今天日记里的事件和待办画成一条螺旋，待办从「现在」往后填进空档，容量条告诉你今天排不排得下；Claude、Codex、WorkBuddy 的会话可以自动记回日记，变成 DOING / SUSPENDED 的任务行和实际时段，任务行下面看得到会话在跑还是在等你、做到了哪一步 | 已上架 Obsidian 社区插件市场，Release 1.6.0，仅桌面端，macOS 上功能最全 |
+| 🌀 [螺旋日程](https://github.com/MatsuriMW/nautilus-spiral) | Obsidian 插件。把今天日记里的事件和待办画成一条螺旋，待办从「现在」往后填进空档，容量条告诉你今天排不排得下；Claude、Codex、WorkBuddy 的会话可以自动记回日记，变成 DOING / SUSPENDED 的任务行和实际时段，任务行下面看得到会话在跑还是在等你、做到了哪一步 | 已上架 Obsidian 社区插件市场，Release 1.7.0，仅桌面端，macOS 上功能最全 |
 | 🧾 [Token 小票](https://github.com/MatsuriMW/token-receipt) | Obsidian 插件。把一天里 Claude Code、Codex、WorkBuddy 用掉的 token 打成一张购物小票：按模型列出 token 和按 API 标价折算的金额，还有订阅额度用了多少。小票会从热敏打印机里走出来，也能落在木桌、钉上软木板，可以存成图片或会动的 SVG | 已上架 Obsidian 社区插件市场，Release 1.3.1，仅桌面端 |
-| 💬 [Telegram Companion](https://github.com/MatsuriMW/telegram-companion) | Obsidian 插件。手机上随手发一句进当天日记；想聊的时候，它先读你近一周的日记再开口。模型自己选，接本机 Ollama 的话日记不出电脑 | Release 1.0.2，GPL-3.0，基于 Telegram Inbox |
+| 💬 [Telegram Companion](https://github.com/MatsuriMW/telegram-companion) | Obsidian 插件。手机上随手发一句进当天日记；想聊的时候，它先读你近一周的日记再开口。模型自己选，接本机 Ollama 的话日记不出电脑 | 已上架 Obsidian 社区插件市场，Release 1.0.5，GPL-3.0，基于 Telegram Inbox |
 | 🔗 [Roam Backlinks](https://github.com/MatsuriMW/roam-backlinks) | Obsidian 插件。像 Logseq、Roam Research 那样在反链里逐块原地编辑，带可展开的面包屑和带反链的 PDF 导出 | 已上架 Obsidian 社区插件市场，Release 1.0.1 |
 | 🎭 [AI 人物设计 Skill](https://github.com/MatsuriMW/ai-character-design-skill) | 把「轻佻的男性」这种模糊感觉，拆成生图、生视频模型能直接执行的锁定段。附 122 张人物原型卡、服化道和连戏表 | v0.1.3，适用于 Claude Code / Codex / claude.ai |
 | 🖼 [角色设定板 + 古典式配图](https://github.com/MatsuriMW/aigc-skills-and-agents) | 两个 Claude Skill：锁定角色长相的三视图和表情板 prompt；版画质感的 SVG 解释图 | 可用 |
@@ -48,5 +44,5 @@ https://github.com/user-attachments/assets/1e0967bc-d498-456a-9d82-46750d761c08
 
 ## 正在做的
 
-- **Telegram Companion**：Telegram Inbox 的原作者已经同意上架，准备提交 Obsidian 社区插件市场。
-- **按感觉找图**：用 SigLIP2 给约 8,400 张设计素材建语义索引，一句话或一张参考图找图。
+- **第二大脑的检索**：Obsidian-Plugins 里那个本地混合检索（向量 + BM25）。给它建了 48 道题的评测集和 16 道不参与调参的留出题，按 bad case 调了拒答门槛和切块：首条命中 70% → 80%，MRR 0.809 → 0.872，库里没有答案的问题从一道都挡不住到 8 道全部拒答。下一步加按日期和文件夹过滤。
+- **小红书舆情研判工作流**：n8n 定时调小红书 MCP 抓品牌相关的笔记和评论，DeepSeek 逐条编码（说的是不是这个品牌、情感、语气、高压线、动员级别、在拿谁做对比），指标由代码算，模型写研判，再用代码规则和另一个模型给研判打分。自动评测之后留一道人工复核，复核出的误判写回配置和编码规则，下一轮自动生效。
