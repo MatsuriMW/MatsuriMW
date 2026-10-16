@@ -45,4 +45,8 @@ https://github.com/user-attachments/assets/1e0967bc-d498-456a-9d82-46750d761c08
 ## 正在做的
 
 - **第二大脑的检索**：Obsidian-Plugins 里那个本地混合检索（向量 + BM25）。给它建了 48 道题的评测集和 16 道不参与调参的留出题，按 bad case 调了拒答门槛和切块：首条命中 70% → 80%，MRR 0.809 → 0.872，库里没有答案的问题从一道都挡不住到 8 道全部拒答。下一步加按日期和文件夹过滤。
-- **[小红书舆情研判工作流](https://github.com/MatsuriMW/xhs-yuqing)**：n8n 定时调小红书 MCP 抓品牌相关的笔记和评论，DeepSeek 逐条编码（说的是不是这个品牌、情感、语气、高压线、动员级别、在拿谁做对比），指标由代码算，模型写研判，再用代码规则和另一个模型给研判打分。自动评测之后留一道人工复核，复核出的误判写回配置和编码规则，下一轮自动生效。
+- **[小红书舆情研判工作流](https://github.com/MatsuriMW/xhs-yuqing)**：n8n 定时调小红书 MCP 抓品牌相关的笔记和评论，DeepSeek 逐条编码（说的是不是这个品牌、情感、语气、高压线、动员级别、在拿谁做对比），指标由代码算，模型写研判，再用代码规则和另一个模型给研判打分。自动评测之后留一道人工复核，复核出的误判写回配置和编码规则，下一轮自动生效。[Demo](https://matsuri.site/demo/xhs-yuqing/)：特斯拉 Roadster 发布后 24 小时的研判，含人工复核前后的对照。
+
+<p align="center">
+  <a href="https://matsuri.site/demo/xhs-yuqing/"><img src="assets/xhs-yuqing-demo.jpg" width="420" alt="舆情研判 demo：特斯拉 Roadster 发布后 24 小时，机器初判和人工复核的对照"></a>
+</p>
