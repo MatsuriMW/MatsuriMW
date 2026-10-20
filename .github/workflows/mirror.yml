@@ -40,6 +40,10 @@ jobs:
       - name: Build mirror
         run: python3 profile/scripts/mirror.py --repo profile --out site/github
 
+      - name: Check push access
+        working-directory: site
+        run: git push --dry-run origin HEAD:master
+
       - name: Push if changed
         working-directory: site
         run: |
