@@ -1,0 +1,54 @@
+name: Mirror to matsuri.site/github
+
+# README 一改，就把镜像页重新生成并推到博客的部署仓库 MatsuriMW.github.io
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - README.md
+      - assets/**
+      - scripts/mirror.py
+      - .github/workflows/mirror.yml
+  workflow_dispatch:
+
+concurrency:
+  group: mirror
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout profile README
+        uses: actions/checkout@v4
+        with:
+          path: profile
+
+      - name: Checkout site
+        uses: actions/checkout@v4
+        with:
+          repository: MatsuriMW/MatsuriMW.github.io
+          ref: master
+          path: site
+          ssh-key: ${{ secrets.SITE_DEPLOY_KEY }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build mirror
+        run: python3 profile/scripts/mirror.py --repo profile --out site/github
+
+      - name: Push if changed
+        working-directory: site
+        run: |
+          git add github
+          if git diff --cached --quiet; then
+            echo "镜像没有变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "GitHub 主页镜像：同步 MatsuriMW/MatsuriMW@${GITHUB_SHA::7}"
+          git push -q origin HEAD:master
