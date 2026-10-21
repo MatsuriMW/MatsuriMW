@@ -56,9 +56,10 @@ Outline Sidebar 把一场 Claude Code 会话整理成 Logseq 式的可折叠大�
 
 - **「做了」挂证据**：改了哪些文件、跑了哪些命令、成没成，直接从工具调用里记下来；模型总结时只能从中挑证据，挑不出就标「无证据」
 - **验收关口**：待 review 的块要先展开看过证据才能改成 Done，通过时告诉 Claude「用户看过证据后验收」，没证据的条目一并说出来
-- **负面状态**：Failed、Errored、Hit Limit!、Suspended、Cancelled 一键循环，回传时告诉 Claude 每种状态该怎么接
+- **验收没通过，Claude 接着回应**：Rework（要改）、Unclear?（没看懂）、Failed、Errored、Hit Limit!、Suspended、Cancelled 各有一个快捷键。标完停手 4 秒，mod 替我发一条消息，按状态让 Claude 返工、追问、解释或停下；一次打回好几件时，让它把互不相干的交给子代理并行做
+- **指标**：证据覆盖率、验收拦下率、返工率、纠正层级，按本次会话和所有会话各算一遍，看这套 harness 到底拦下了多少东西
 
-现在主要优化的是 Claude Code 的终端版，尤其是中文输入法：点进侧栏自动切英文键盘，回对话框再切回来；只用方向键和回车也能做完所有操作；图标做成自制字体，和中文对齐。桌面版和 VS Code 里也能用，但还比较简陋，客户端版本后面再优化。
+**目前适配 Claude Code CLI（终端）**，尤其照顾中文输入法：点进侧栏自动切英文键盘，回对话框再切回来；只用方向键和回车也能做完所有操作；图标做成自制字体，和中文对齐。Desktop 版和 VS Code 里能打开，但还很简陋，Desktop 版后面再做。
 
 ### Skill
 
@@ -83,7 +84,7 @@ Outline Sidebar 把一场 Claude Code 会话整理成 Logseq 式的可折叠大�
 
 ## 正在做的
 
-- **[Outline Sidebar](https://github.com/MatsuriMW/outline-sidebar)**：刚加上「做了」挂证据和验收关口。下一步给它量指标：证据覆盖率、验收时被拦下来返工的比例；再把桌面客户端做好。
+- **[Outline Sidebar](https://github.com/MatsuriMW/outline-sidebar)**：证据、验收关口、验收不通过后的自动返工和追问、四个指标都已上线，接下来用几周攒数据，看验收到底拦下了多少；之后做 Desktop 版。
 - **第二大脑的检索**：Obsidian-Plugins 里那个本地混合检索（向量 + BM25）。给它建了 48 道题的评测集和 16 道不参与调参的留出题，按 bad case 调了拒答门槛和切块：首条命中 70% → 80%，MRR 0.809 → 0.872，库里没有答案的问题从一道都挡不住到 8 道全部拒答。[在线版](https://matsuri.site/demo/second-brain/)已经上线，补上了生成层：bge-m3 混合检索加重排，DeepSeek 生成，加重排后首条命中率 71% → 85%；44 道应答题忠实度 99%、引用准确率 100%，15 道应拒答题全部拒住。下一步加按日期和文件夹过滤。
 - **[小红书舆情研判工作流](https://github.com/MatsuriMW/xhs-yuqing)**：n8n 定时调小红书 MCP 抓品牌相关的笔记和评论，DeepSeek 逐条编码（说的是不是这个品牌、情感、语气、高压线、动员级别、在拿谁做对比），指标由代码算，模型写研判，再用代码规则和另一个模型给研判打分。自动评测之后留一道人工复核，复核出的误判写回配置和编码规则，下一轮自动生效。[Demo](https://matsuri.site/demo/xhs-yuqing/)：特斯拉 Roadster 发布后 24 小时的研判，含人工复核前后的对照。
 
