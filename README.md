@@ -37,6 +37,8 @@ https://github.com/user-attachments/assets/1e0967bc-d498-456a-9d82-46750d761c08
 
 ## 可以直接拿去用的
 
+上架 Obsidian 社区插件市场的 5 个插件，在我的[社区主页](https://community.obsidian.md/users/matsurimw)上能一次看全。
+
 | 项目 | 它做什么 | 现在的状态 |
 |---|---|---|
 | 🌀 [螺旋日程](https://github.com/MatsuriMW/nautilus-spiral) | Obsidian 插件。把今天日记里的事件和待办画成一条螺旋，待办从「现在」往后填进空档，容量条告诉你今天排不排得下；Claude、Codex、WorkBuddy 的会话可以自动记回日记，变成 DOING / SUSPENDED 的任务行和实际时段，任务行下面看得到会话在跑还是在等你、做到了哪一步 | 已上架 Obsidian 社区插件市场，Release 1.7.0，仅桌面端，macOS 上功能最全 |
