@@ -56,7 +56,7 @@ Outline Sidebar 把一场 Claude Code 会话整理成 Logseq 式的可折叠大�
 
 - **「做了」挂证据**：改了哪些文件、跑了哪些命令、成没成，直接从工具调用里记下来；模型总结时只能从中挑证据，挑不出就标「无证据」
 - **验收关口**：待 review 的块要先展开看过证据才能改成 Done，通过时告诉 Claude「用户看过证据后验收」，没证据的条目一并说出来
-- **验收没通过，Claude 接着回应**：Rework（要改）、Unclear?（没看懂）、Failed、Errored、Hit Limit!、Suspended、Cancelled 各有一个快捷键。标完停手 4 秒，mod 替我发一条消息，按状态让 Claude 返工、追问、解释或停下；一次打回好几件时，让它把互不相干的交给子代理并行做
+- **验收没通过，Claude 接着回应**：Rework（要改）、Unclear?（没看懂）、Failed、Suspended、Cancelled 各有一个快捷键（Errored、Hit Limit! 是 Agent 报给我的，由 mod 自动标）。标完停手 4 秒，mod 替我发一条消息，按状态让 Claude 返工、追问、解释或停下；一次打回好几件时，让它把互不相干的交给子代理并行做
 - **指标**：证据覆盖率、验收拦下率、返工率、纠正层级，按本次会话和所有会话各算一遍，看这套 harness 到底拦下了多少东西
 
 **目前适配 Claude Code CLI（终端）**，尤其照顾中文输入法：点进侧栏自动切英文键盘，回对话框再切回来；只用方向键和回车也能做完所有操作；图标做成自制字体，和中文对齐。Desktop 版和 VS Code 里能打开，但还很简陋，Desktop 版后面再做。
