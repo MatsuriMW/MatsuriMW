@@ -71,7 +71,7 @@ Outline Sidebar 把一场 Claude Code 会话整理成 Logseq 式的可折叠大�
 
 ## Obsidian 插件
 
-上架 Obsidian 社区插件市场的 5 个插件，在我的[社区主页](https://community.obsidian.md/users/matsurimw)上能一次看全。
+上架 Obsidian 社区插件市场的 11 个插件，在我的[社区主页](https://community.obsidian.md/users/matsurimw)上能一次看全。
 
 | 项目 | 它做什么 | 现在的状态 |
 |---|---|---|
