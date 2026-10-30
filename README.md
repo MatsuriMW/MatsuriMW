@@ -5,6 +5,8 @@
 <a id="zh" name="zh"></a>
 <p align="center"><b>中文</b> · <a href="#english">English</a></p>
 
+<p align="center">想追踪新功能、反馈问题、看我最近的进展，欢迎关注我的 Twitter：<a href="https://x.com/Matsurimywaifu">@Matsurimywaifu</a></p>
+
 <table align="center">
   <tr>
     <td align="center"><a href="https://github.com/MatsuriMW/token-receipt"><img src="assets/token-receipt.svg" width="228" height="440" alt="Token 小票：一天的 token 用量从热敏打印机里打出来"></a></td>
@@ -114,6 +116,8 @@ Outline Sidebar 把一场 Claude Code 会话整理成 Logseq 式的可折叠大�
 
 <a id="english" name="english"></a>
 <p align="center"><a href="#zh">中文</a> · <b>English</b></p>
+
+<p align="center">To follow new features, send feedback or keep up with my recent progress, follow me on Twitter: <a href="https://x.com/Matsurimywaifu">@Matsurimywaifu</a></p>
 
 The demo pages linked below are in Chinese.
 
