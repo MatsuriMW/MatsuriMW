@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="assets/header.svg" width="840" alt="马自立：用 Agent 把想法做成能用的东西">
-</p>
 
 <a id="zh" name="zh"></a>
 <p align="center"><b>中文</b> · <a href="#english">English</a></p>
