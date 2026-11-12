@@ -23,10 +23,6 @@
   </tr>
 </table>
 
-<p align="center">🌀 <a href="https://github.com/MatsuriMW/nautilus-spiral">螺旋日程</a> · 50 秒介绍片（有声音）：片子里的面板是插件自己的代码按一篇虚构日记画出来的<br>🌀 <a href="https://github.com/MatsuriMW/nautilus-spiral">Nautilus Spiral</a> · 50-second intro (with sound): every panel in it is drawn by the plugin's own code from a made-up journal</p>
-
-https://github.com/user-attachments/assets/1e0967bc-d498-456a-9d82-46750d761c08
-
 <p align="center">🌀 螺旋日程 + 🛰 Agent Deck · 日记里每一行 DOING 下面，实时显示它绑着的 Agent 会话在跑还是在等你、最近一步、用了多少 token，派出去的 subagent 和开着的 side chat 也在这里<br>Nautilus Spiral + Agent Deck · under each DOING line in the journal: whether its agent session is running or waiting for you, the latest step and the tokens used, plus the subagents it sent out and any open side chat</p>
 
 <p align="center">
