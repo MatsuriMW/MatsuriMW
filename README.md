@@ -6,12 +6,7 @@
   <a href="https://matsuri.site/portfolio/journal-workflow/"><img src="assets/journal-workflow-film.gif" width="800" alt="日志工作流介绍短片：Obsidian 日记、螺旋日程和 Agent Deck 一起记录的一天"></a>
 </p>
 
-<p align="center"><b>📓 日志工作流 · 介绍短片（2 分 12 秒，有旁白和音效）</b><br>
-今天的日记是唯一的工作台：人在里面写计划，活从某一行派给 AI Agent，进度、结论和实际用时再写回那一行。画面里的 Obsidian 窗口不是录屏，是螺旋日程和 Agent Deck 自己的代码逐帧画出来的。<br>
-<a href="https://matsuri.site/demo/journal-workflow/journal-workflow-720p30.mp4">▶ 播放完整短片（720p，12 MB）</a> · <a href="https://matsuri.site/demo/journal-workflow/journal-workflow-1080p30.mp4">1080p</a> · <a href="https://matsuri.site/portfolio/journal-workflow/">作品页</a> · <a href="assets/journal-workflow-720p.mp4">下载成片</a><br>
-<b>Journal Workflow</b> · a 2:12 intro film with narration and sound: the daily note is the single workbench — delegate a line to an AI agent and its progress and results come back into that same line. <a href="https://matsuri.site/demo/journal-workflow/journal-workflow-720p30.mp4">Watch the full film →</a><br>
-小红书播放量 305 · 收藏 633 · <a href="https://community.obsidian.md/users/matsurimw">Obsidian 插件累计下载 1,208</a>
-</p>
+<p align="center"><b>📓 日志工作流 · 介绍短片</b></p>
 
 <p align="center">想追踪新功能、反馈问题、看我最近的进展，欢迎关注我的 Twitter：<a href="https://x.com/Matsurimywaifu">@Matsurimywaifu</a></p>
 
