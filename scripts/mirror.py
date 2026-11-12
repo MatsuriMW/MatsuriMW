@@ -98,6 +98,13 @@ def main():
             return f'src="assets/{name}"'
         return m.group(0)
     md = re.sub(r'src="([^"]+)"', localize, md)
+    # 「播放完整短片」是 href 不是 src，仓库内的成片也要搬到本站，不然镜像页点不到
+    def copy_linked(m):
+        f = repo / m.group(1)
+        if f.exists():
+            shutil.copy(f, assets / f.name)
+        return m.group(0)
+    md = re.sub(r'href="(assets/[^"]+\.mp4)"', copy_linked, md)
     leftover = re.findall(r'https://(?:raw\.githubusercontent\.com|github\.com/user-attachments)\S+', md)
     if leftover:
         sys.exit(f'还有没搬到本站的资源：{leftover}')
