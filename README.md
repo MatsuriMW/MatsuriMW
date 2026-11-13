@@ -1,3 +1,19 @@
+<h1 align="center">Hey, I'm 马自立 👋</h1>
+
+<hr>
+
+<h3 align="center">AI · Obsidian · 工作流工具</h3>
+<p align="center"><em>让计划、Agent 的进度和结果，回到同一份笔记里。</em></p>
+
+<p align="center">
+  <a href="https://x.com/Matsurimywaifu"><img src="https://img.shields.io/badge/Twitter-1a1a1a?style=for-the-badge&amp;logo=x&amp;logoColor=white" alt="Twitter"></a>
+  <a href="https://www.xiaohongshu.com/user/profile/622da76b00000000100083ac"><img src="https://img.shields.io/badge/小红书-1a1a1a?style=for-the-badge&amp;logo=xiaohongshu&amp;logoColor=white" alt="小红书"></a>
+  <a href="mailto:matsuriismywaifu@gmail.com"><img src="https://img.shields.io/badge/Email-1a1a1a?style=for-the-badge&amp;logo=gmail&amp;logoColor=white" alt="Email"></a>
+</p>
+
+<hr>
+
+🔧 **正在做：** [Agent Deck](https://github.com/MatsuriMW/obsidian-agent-deck) · 从笔记派发 AI 任务，把进度与结果写回原处。
 
 <a id="zh" name="zh"></a>
 <p align="center"><b>中文</b> · <a href="#english">English</a></p>
@@ -7,8 +23,6 @@
 </p>
 
 <p align="center"><b>📓 日志工作流 · 介绍短片</b></p>
-
-<p align="center">想追踪新功能、反馈问题、看我最近的进展，欢迎关注我的 Twitter：<a href="https://x.com/Matsurimywaifu">@Matsurimywaifu</a></p>
 
 <table align="center">
   <tr>
