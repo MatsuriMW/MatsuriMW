@@ -7,13 +7,13 @@
 
 <p align="center">
   <a href="https://x.com/Matsurimywaifu"><img src="https://img.shields.io/badge/Twitter-1a1a1a?style=for-the-badge&amp;logo=x&amp;logoColor=white" alt="Twitter"></a>
-  <a href="https://www.xiaohongshu.com/user/profile/622da76b00000000100083ac"><img src="https://img.shields.io/badge/小红书 — 1a1a1a?style=for-the-badge&amp;logo=xiaohongshu&amp;logoColor=white" alt="小红书"></a>
+  <a href="https://www.xiaohongshu.com/user/profile/622da76b00000000100083ac"><img src="https://img.shields.io/badge/小红书— 1a1a1a?style=for-the-badge&amp;logo=xiaohongshu&amp;logoColor=white" alt="小红书"></a>
   <a href="mailto:matsuriismywaifu@gmail.com"><img src="https://img.shields.io/badge/Email-1a1a1a?style=for-the-badge&amp;logo=gmail&amp;logoColor=white" alt="Email"></a>
 </p>
 
 <hr>
 
-🔧 ** 正在做**:  [Agent Deck](https://github.com/MatsuriMW/obsidian-agent-deck) · 一种文本形式的 Harness。
+🔧 ** 正在做 **:  [Agent Deck](https://github.com/MatsuriMW/obsidian-agent-deck) · 一种文本形式的 Harness。
 
 <a id="zh" name="zh"></a>
 <p align="center"><b> 中文 </b> · <a href="#english">English</a></p>
