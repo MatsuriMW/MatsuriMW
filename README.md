@@ -13,7 +13,7 @@
 
 <hr>
 
-🔧 ** 正在做：** [Agent Deck](https://github.com/MatsuriMW/obsidian-agent-deck) · 一种文本形式的 Harness。
+🔧 ** 正在做**:  [Agent Deck](https://github.com/MatsuriMW/obsidian-agent-deck) · 一种文本形式的 Harness。
 
 <a id="zh" name="zh"></a>
 <p align="center"><b> 中文 </b> · <a href="#english">English</a></p>
