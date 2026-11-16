@@ -2,27 +2,27 @@
 
 <hr>
 
-<h3 align="center">AI · Obsidian · 工作流工具</h3>
-<p align="center"><em>让计划、Agent 的进度和结果，回到同一份笔记里。</em></p>
+<h3 align="center">AI · Obsidian · 工作流工具 </h3>
+<p align="center"><em> 让计划、Agent 的进度和结果，回到同一份笔记里。</em></p>
 
 <p align="center">
   <a href="https://x.com/Matsurimywaifu"><img src="https://img.shields.io/badge/Twitter-1a1a1a?style=for-the-badge&amp;logo=x&amp;logoColor=white" alt="Twitter"></a>
-  <a href="https://www.xiaohongshu.com/user/profile/622da76b00000000100083ac"><img src="https://img.shields.io/badge/小红书-1a1a1a?style=for-the-badge&amp;logo=xiaohongshu&amp;logoColor=white" alt="小红书"></a>
+  <a href="https://www.xiaohongshu.com/user/profile/622da76b00000000100083ac"><img src="https://img.shields.io/badge/小红书 — 1a1a1a?style=for-the-badge&amp;logo=xiaohongshu&amp;logoColor=white" alt="小红书"></a>
   <a href="mailto:matsuriismywaifu@gmail.com"><img src="https://img.shields.io/badge/Email-1a1a1a?style=for-the-badge&amp;logo=gmail&amp;logoColor=white" alt="Email"></a>
 </p>
 
 <hr>
 
-🔧 **正在做：** [Agent Deck](https://github.com/MatsuriMW/obsidian-agent-deck) · 从笔记派发 AI 任务，把进度与结果写回原处。
+🔧 ** 正在做：** [Agent Deck](https://github.com/MatsuriMW/obsidian-agent-deck) · 一种文本形式的 Harness。
 
 <a id="zh" name="zh"></a>
-<p align="center"><b>中文</b> · <a href="#english">English</a></p>
+<p align="center"><b> 中文 </b> · <a href="#english">English</a></p>
 
 <p align="center">
   <a href="https://matsuri.site/portfolio/journal-workflow/"><img src="assets/journal-workflow-film.gif" width="800" alt="日志工作流介绍短片：Obsidian 日记、螺旋日程和 Agent Deck 一起记录的一天"></a>
 </p>
 
-<p align="center"><b>📓 日志工作流 · 介绍短片</b></p>
+<p align="center"><b>📓 日志工作流 · 介绍短片 </b></p>
 
 <table align="center">
   <tr>
@@ -31,19 +31,19 @@
     <td align="center"><a href="https://github.com/MatsuriMW/telegram-companion"><img src="https://raw.githubusercontent.com/MatsuriMW/telegram-companion/main/docs/images/chat.jpg" width="203" height="440" alt="Telegram Companion：让它夸夸我，它拿日记里当天做的事来夸"></a></td>
   </tr>
   <tr>
-    <td align="center">🧾 Token 小票<br>Token Receipt</td>
-    <td align="center">🌀 螺旋日程<br>Nautilus Spiral</td>
+    <td align="center">🧾 Token 小票 <br>Token Receipt</td>
+    <td align="center">🌀 螺旋日程 <br>Nautilus Spiral</td>
     <td align="center">💬 Telegram Companion</td>
   </tr>
 </table>
 
-<p align="center">🌀 螺旋日程 + 🛰 Agent Deck · 日记里每一行 DOING 下面，实时显示它绑着的 Agent 会话在跑还是在等你、最近一步、用了多少 token，派出去的 subagent 和开着的 side chat 也在这里<br>Nautilus Spiral + Agent Deck · under each DOING line in the journal: whether its agent session is running or waiting for you, the latest step and the tokens used, plus the subagents it sent out and any open side chat</p>
+<p align="center">🌀 螺旋日程 + 🛰 Agent Deck · 日记里每一行 DOING 下面，实时显示它绑着的 Agent 会话在跑还是在等你、最近一步、用了多少 token，派出去的 subagent 和开着的 side chat 也在这里 <br>Nautilus Spiral + Agent Deck · under each DOING line in the journal: whether its agent session is running or waiting for you, the latest step and the tokens used, plus the subagents it sent out and any open side chat</p>
 
 <p align="center">
   <a href="https://github.com/MatsuriMW/nautilus-spiral"><img src="https://raw.githubusercontent.com/MatsuriMW/nautilus-spiral/main/assets/agent-lines.gif" width="800" alt="日记里四行 DOING 的任务，每行下面一条等宽字符的进度：监听 Claude · 在跑 · 最近一步 · token；其中一行下面还有一行「side chat · 开着 · 8m」"></a>
 </p>
 
-<p align="center">🛰 <a href="https://github.com/MatsuriMW/obsidian-agent-deck">Agent Deck（智能体甲板）</a> · 25 秒演示：把散在各个客户端里的 AI Agent 会话收到一张甲板上，活从笔记里派出去，进度和结果回到笔记里<br>🛰 <a href="https://github.com/MatsuriMW/obsidian-agent-deck">Agent Deck</a> · 25-second demo: AI agent sessions scattered across apps gathered on one deck; work goes out from your notes, and progress and results come back to them</p>
+<p align="center">🛰 <a href="https://github.com/MatsuriMW/obsidian-agent-deck">Agent Deck（智能体甲板）</a> · 25 秒演示：把散在各个客户端里的 AI Agent 会话收到一张甲板上，活从笔记里派出去，进度和结果回到笔记里 <br>🛰 <a href="https://github.com/MatsuriMW/obsidian-agent-deck">Agent Deck</a> · 25-second demo: AI agent sessions scattered across apps gathered on one deck; work goes out from your notes, and progress and results come back to them</p>
 
 <p align="center">
   <a href="https://github.com/MatsuriMW/obsidian-agent-deck"><img src="assets/agent-deck.gif" width="800" alt="Agent Deck 演示：会话卡片拖到日记里的任务上绑定，任务拖到 Agent 上委派，状态和结论写回日记"></a>
@@ -55,7 +55,7 @@
 
 ## Claude 相关：Mod 和 Skill
 
-### 🗂 [Outline Sidebar](https://github.com/MatsuriMW/outline-sidebar)：Claude Code mod，一次 harness 工程实践
+### 🗂 [Outline Sidebar](https://github.com/MatsuriMW/outline-sidebar)：Claude Code mod，一次 harness 工程实践 
 
 AI 时代，人的注意力成了瓶颈。活儿大多交给 Agent 去干，人负责 review；而一场长会话最容易把「装着问题的注意力」切碎：结论、要我拍板的事、交代出去的活、已经做完的事全搅在一条只往下长的流里，回头找要一路往上翻。
 
